@@ -16,8 +16,9 @@ window.onload = function() {
 
   const crearCarta = (num, vira) => {
     let card = document.createElement("div");
-    card.classList.add("card", "me-2");
+    card.classList.add("card", "mt-3", "p-1", "text-center", "me-2");
     let arriba = document.createElement("p");
+    arriba.setAttribute("class", "position-absolute top-0");
     arriba.style.color =
       pintas[vira] === "♥" || pintas[vira] === "♦" ? "red" : "black";
     arriba.textContent = pintas[vira];
@@ -40,7 +41,7 @@ window.onload = function() {
     for (let index = 0; index < num; index++) {
       let random = Math.floor(Math.random() * mazo.length);
       let roll = Math.floor(Math.random() * pintas.length);
-      const carta = { num: mazo[random], vira: pintas[roll] };
+      const carta = { num: random, vira: roll };
       cartasGeneradas.push(carta);
       div.appendChild(crearCarta(random, roll));
     }
