@@ -1,4 +1,5 @@
 /* eslint-disable */
+/* RdeRausseo, Angel Rausseo */
 import "bootstrap";
 import "./style.css";
 
@@ -41,9 +42,9 @@ window.onload = function() {
     for (let index = 0; index < num; index++) {
       let random = Math.floor(Math.random() * mazo.length);
       let roll = Math.floor(Math.random() * pintas.length);
-      const carta = { num: random, vira: roll };
+      const carta = { num: random + 1, vira: roll };
       cartasGeneradas.push(carta);
-      div.appendChild(crearCarta(random, roll));
+      div.appendChild(crearCarta(random + 1, roll));
     }
     cardContainer.appendChild(div);
     console.log(cartasGeneradas);
@@ -56,6 +57,9 @@ window.onload = function() {
     if (cartasGeneradas.length > 0) {
       while (cardContainer.firstChild) {
         cardContainer.removeChild(cardContainer.firstChild);
+      }
+      while (orderCard.firstChild) {
+        orderCard.removeChild(orderCard.firstChild);
       }
       cartasGeneradas = [];
       cartasOrdenadas = [];
@@ -99,8 +103,16 @@ window.onload = function() {
   const buttom = document.getElementById("ordenar");
 
   buttom.addEventListener("click", function() {
+    if (cartasOrdenadas.length > 0) {
+      while (orderCard.firstChild) {
+        orderCard.removeChild(orderCard.firstChild);
+      }
+      const title = document.createElement("h5");
+      title.textContent = "cartas ordenadas";
+      orderCard.appendChild(title);
+    }
+
     sortCards(cartasGeneradas);
-    console.log(cartasOrdenadas, "cartas ordenadas");
     mostrarCartasOrdenadas();
     const formulario = document.getElementById("form");
     formulario.reset();
